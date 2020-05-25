@@ -61,6 +61,7 @@ class CreateLink(graphene.Mutation):
 class CreateVote(graphene.Mutation):
     user = graphene.Field(UserType)
     link = graphene.Field(LinkType)
+    id = graphene.Int()
 
     class Arguments:
         link_id = graphene.Int()
@@ -72,10 +73,11 @@ class CreateVote(graphene.Mutation):
 
         link = Link.objects.filter(id=link_id).first()
         if not link:
-            raise Exception("Invalid link!")
+            raise GraphQLError("Invalid link!")
 
-        Vote.objects.create(user=user, link=link)
-        return CreateVote(user=user, link=link)
+        vote = Vote(user=user, link=link)
+        vote.save()
+        return CreateVote(user=user, link=link, id=vote.id)
 
 
 class Mutation(graphene.ObjectType):
