@@ -4,6 +4,7 @@ import LinkList from './links/LinkList'
 import CreateLink from './links/CreateLink'
 import Header from './header/Header'
 import Login from './auth/Login'
+import AuthenticatedApp from './AuthenticatedApp'
 
 const App = props => (
   <div className='center w85'>
@@ -11,8 +12,9 @@ const App = props => (
     <div className='ph3 pv1 background-gray'>
       <Switch>
         <Route exact path='/login' component={Login} />
-        <Route exact path='/' component={LinkList} />
         <Route exact path='/create' component={CreateLink} />
+        {/* <Route exact path='/' component={LinkList} /> */}
+        <AuthenticatedApp />
       </Switch>
     </div>
   </div>

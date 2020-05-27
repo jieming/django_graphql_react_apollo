@@ -32,23 +32,6 @@ const LINKS_QUERY = gql`
 const LinkList = props => {
   const { loading, error, data } = useQuery(LINKS_QUERY)
 
-  // const updateCacheAfterVote = (cache, createdVote, linkId) => {
-  //   const { links } = cache.readQuery({ query: LINKS_QUERY })
-
-  //   cache.writeQuery({
-  //     query: LINKS_QUERY,
-  //     data: {
-  //       links: links.map(link => {
-  //         if (link.id === linkId) {
-  //           console.log('createdVote.link - ', createdVote.link)
-  //           return createdVote.link
-  //         }
-  //         return link
-  //       }),
-  //     },
-  //   })
-  // }
-
   if (loading) return <div>Loading....</div>
 
   if (error) return <div>Error!</div>
