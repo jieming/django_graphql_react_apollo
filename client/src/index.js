@@ -5,8 +5,9 @@ import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter } from 'react-router-dom'
 
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './root-reducer'
 
 import { setContext } from 'apollo-link-context'
@@ -36,7 +37,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()))
 
 ReactDOM.render(
   <BrowserRouter>
